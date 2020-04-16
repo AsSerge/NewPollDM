@@ -49,10 +49,12 @@ $polls = $db->query($poll_name_quest);
             echo "<td><button type='button' class='btn btn-info btn-xs' onclick=\"javascript:document.location.href='/_prog/polls/poll_mail_save.php?poll_id=".$row['poll_id']."'\">Настроить рассылку</button></td>";
             if(GetRowCount($db, "SELECT * FROM poll_mailing WHERE poll_id = ?", $row['poll_id'])){
                 $des = '';
+                $color = 'btn-success';
             }else{
                 $des = 'disabled';
+                $color = 'btn-info';
             }
-            echo "<td><button type='button' class='btn btn-info btn-xs' {$des}><span class='glyphicon glyphicon-envelope'></span></button></td>";
+            echo "<td><button type='button' class='btn {$color} btn-xs' {$des}><span class='glyphicon glyphicon-envelope'></span></button></td>";
             echo "<td><button type='button' class='btn btn-primary btn-xs' onclick=\"javascript:document.location.href='/_prog/polls/poll_result_report.php?poll_id=".$row['poll_id']."'\">Результаты опроса</button></td>";
             echo "</tr>";
         }
