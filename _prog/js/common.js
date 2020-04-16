@@ -68,3 +68,17 @@ $('#GroupEdit').on('show.bs.modal', function (event) {
 	modal.find('.modal-body input[name=group_description]').val(recipient[2])	// Устанавливаем значение поля Описание
 	modal.find('input[name=group_id]').val(recipient[0]) // Задаем ID записи
 });
+
+// Модальное окно для правки списка авторов
+$('#AuthorEdit').on('show.bs.modal', function (event) {
+	var button = $(event.relatedTarget) // Button that triggered the modal
+	var recipient = button.data('whatever').split('|')
+	var modal = $(this)
+	modal.find('.modal-title').text('Редактирование ' + recipient[1]) // Устанавливаем заголовок окна
+	modal.find('.modal-body input[name=author_name]').val(recipient[1]) // Устанавливаем значение поля Название
+	modal.find('.modal-body input[name=author_mail]').val(recipient[2])	// Устанавливаем значение поля Описание
+	modal.find('.modal-body input[name=author_phone]').val(recipient[3])	// Устанавливаем значение поля Описание
+	modal.find('.modal-body input[name=author_position]').val(recipient[4])	// Устанавливаем значение поля Описание
+	
+	modal.find('input[name=author_id]').val(recipient[0]) // Задаем ID записи
+});

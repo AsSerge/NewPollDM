@@ -37,6 +37,7 @@
                 <li><a href="../../_prog/">Список опросов</a></li>
               <li class="dropdown-header">Управление пользователями</li>  
                 <li><a href="../../_prog/polls/edit_user.php">Список пользователей</a></li>
+                <li><a href="../../_prog/polls/edit_author.php">Список авторов</a></li>
               <li class="dropdown-header">Управление группами</li>  
                 <li><a href="../../_prog/polls/edit_group.php">Список групп</a></li>  
               </ul>
