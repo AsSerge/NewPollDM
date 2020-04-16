@@ -5,6 +5,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/_prog/layot/top_site.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/_prog/layot/top_menu.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/_prog/layot/function_site.php');
 
+
 //Подключаемся к базе опросов
 include('../rnd/connect/connect_to_base.php');
 // Получаем список готовых отчетов
