@@ -1,0 +1,11 @@
+/*Настройка карточки дизайна*/
+.inptext {
+    font-size: 0.7em;
+    width: 80%;
+    margin-left: 10px;
+    padding: 5px;
+}        
+.i_check{
+    border: 2px solid;
+    border-color: #00760e;
+}
