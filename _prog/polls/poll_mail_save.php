@@ -136,11 +136,6 @@ if($mailing_status_check){
 <div class="row">
     <div class = "col-md-12 button_center">        
         <input class="btn btn-primary" type="submit" value="Сохранить рассылку">
-        <?php
-        if($mailing_status){
-            echo "<input class='btn btn-success' type='button' value='Начать рассылку' onclick='javascript:location.href='/_prog/'>";            
-        }
-        ?>
         <input class="btn btn-warning" type="button" value="Отмена" onclick="javascript:location.href='/_prog/'">
     </div>    
 </div>
