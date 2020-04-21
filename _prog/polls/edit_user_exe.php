@@ -51,12 +51,14 @@ if($_POST['user_action'] == "add"){
     }else{
         $u_mail = $u_mail;
     }
+    $u_token = bin2hex(random_bytes(10)); // формируем токен для пользователя
     // Готовим запрос
-    $sql = "INSERT INTO user (u_name, u_mail, group_id) VALUES (?, ?, ?)"; // Плейсхолдер запроса
+    $sql = "INSERT INTO user (u_token, u_name, u_mail, group_id) VALUES (?, ?, ?, ?)"; // Плейсхолдер запроса
     $stmt = $db->prepare($sql); // Готовим запрос
-    $stmt->bindParam(1, $u_name);
-    $stmt->bindParam(2, $u_mail);
-    $stmt->bindParam(3, $group_id);
+    $stmt->bindParam(1, $u_token);
+    $stmt->bindParam(2, $u_name);
+    $stmt->bindParam(3, $u_mail);
+    $stmt->bindParam(4, $group_id);
     // Исполняем запрос
     $stmt->execute();
     // Возвращаемся на страницу    
@@ -122,10 +124,11 @@ if($_POST['user_action'] == "add"){
         $handle = fopen($user_list_file, "r");
 
         $db->beginTransaction(); // Начинаем транзакцию        
-        $sql_add_list = 'INSERT INTO user (u_name, u_mail, group_id) VALUES (?, ?, ?)'; // готовим запрос
+        $sql_add_list = 'INSERT INTO user (u_token, u_name, u_mail, group_id) VALUES (?, ?, ?, ?)'; // готовим запрос
         $snd_user = $db->prepare($sql_add_list);
 
         while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+            $u_token = bin2hex(random_bytes(10)); // формируем токен для пользователя
             $u_name = iconv('windows-1251', 'UTF-8', $data[0]); // перекодируем
             $u_mail = iconv('windows-1251', 'UTF-8', $data[1]); // перекодируем
             // Проверка на дубликаты и ошибки в тексте
@@ -135,15 +138,18 @@ if($_POST['user_action'] == "add"){
                 $u_mail = PrepMail($u_mail);// проверяем добавляемые почтовые адреса на ошибки в тексте
             }
             // Готовим данные
-            $snd_user->bindParam(1, $u_name);
-            $snd_user->bindParam(2, $u_mail);
-            $snd_user->bindParam(3, $group_id);
+            $snd_user->bindParam(1, $u_token);
+            $snd_user->bindParam(2, $u_name);
+            $snd_user->bindParam(3, $u_mail);
+            $snd_user->bindParam(4, $group_id);
             // Исполняем запрос
             $snd_user->execute();
         }        
         $db->commit(); // Закрываем транцакцию и пишем в базу
         fclose($handle); // Закрываем файл
     }
+        // Возвращаемся на страницу    
+        header("Location: /_prog/polls/edit_user.php"); exit();
 }
 
 ?>

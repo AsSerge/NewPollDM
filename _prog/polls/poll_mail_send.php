@@ -40,11 +40,11 @@ $g_users->execute([$group_id]);
 $i = 0;
 while($row = $g_users->fetch()){
     $user[$i]['u_id'] = $row['u_id'];
+    $user[$i]['u_token'] = $row['u_token'];
     $user[$i]['mail'] = $row['u_mail'];
     $user[$i]['name'] = $row['u_name'];
     $i++;
 }
-
 ?>
 <style>
 .button_center{
@@ -59,7 +59,7 @@ while($row = $g_users->fetch()){
 
 foreach($user as $u){
 $text = $mailing_text."<br>";
-$text .= "Ваша ссылка для голосования: <a href = 'http://shop.cleanelly.ru//rnd/index.php?poll_id={$poll_id}&u_id={$u['u_id']}'>Ссылка</a><br>";
+$text .= "{$u['name']} - Ваша ссылка для голосования: <a href = 'http://shop.cleanelly.ru/rnd/index.php?poll_id={$poll_id}&u_token={$u['u_token']}'>Ссылка</a><br>";
 // $text .= "Ваша ссылка для голосования: <a href = '{$_SERVER['DOCUMENT_ROOT']}/rnd/index.php?poll_id={$poll_id}&u_id={$u['u_id']}'>Ссылка</a><br>";
 $text .= "=========================================<br>";
 $text .= "C Уважением<br>";

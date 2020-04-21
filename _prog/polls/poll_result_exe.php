@@ -6,6 +6,7 @@ include('../../rnd/connect/connect_to_base.php');
 $poll_id = $_POST['poll_id'];
 $question_id = $_POST['question_id'];
 $u_id = $_POST['u_id'];
+$u_token = $_POST['u_token'];
 
 // функция очистки поля сообщения
 function сleanComment($value) {
@@ -64,5 +65,6 @@ foreach($design_id_arr as $answer){
 
     $i++;
 }
-header("Location: ../../../../rnd/index.php?poll_id={$poll_id}&u_id={$u_id}"); exit();
+
+header("Location: ../../../../rnd/index.php?poll_id={$poll_id}&u_token={$u_token}"); exit();
 ?>

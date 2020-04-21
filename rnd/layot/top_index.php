@@ -3,19 +3,22 @@ session_start();
 include('connect/connect_to_base.php');
 
 $poll_id = $_GET['poll_id']; //получаем имя опроса по id
-$u_id = $_GET['u_id']; // получаем имя клиента по id
+//$u_id = $_GET['u_id']; // получаем имя клиента по id
+$u_token = $_GET['u_token']; // получаем имя клиента по токену
+
 
 $_SESSION['poll_id'] = $poll_id;
-$_SESSION['u_id'] = $u_id;
+// $_SESSION['u_id'] = $u_id;
+$_SESSION['u_token'] = $u_token;
 
 $poll_name_quest = 'SELECT poll_name FROM poll WHERE poll_id = ?';
 $quest_p_name = $db->prepare($poll_name_quest);
 $quest_p_name->execute([$poll_id]);
 $poll_name = $quest_p_name->fetchColumn();
 
-$u_name_quest = 'SELECT u_name FROM user WHERE u_id = ?';
+$u_name_quest = 'SELECT u_name FROM user WHERE u_token = ?';
 $u_p_name = $db->prepare($u_name_quest);
-$u_p_name->execute([$u_id]);
+$u_p_name->execute([$u_token]);
 $u_name = $u_p_name->fetchColumn();
 
 ?>
