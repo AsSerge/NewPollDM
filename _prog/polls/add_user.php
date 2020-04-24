@@ -71,7 +71,7 @@ if($add_type == 'one'){
     echo "  <div class='form-group col-sm-8'>";
     echo "      <label for='user_list'>Загрузить файл в формате CSV</label>";
     echo "      <input type='file' class='user_list' name='user_list'>";
-    echo "      <p class='help-block'>Скачать <a href = '#'>образец файла</a> для подлива</p>";
+    echo "      <p class='help-block'>Скачать <a href = '".$_SERVER['DOCUMENT_ROOT']."/rnd/template/temp.csv'>образец файла</a> в формате CSV для подлива</p>";
     echo "  </div>";
     echo "  <div class='form-group col-sm-4'>";
     echo "<label for='group_id'>Выбрать группу для загрузки</label>";

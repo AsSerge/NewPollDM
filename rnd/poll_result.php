@@ -19,9 +19,7 @@
     <?php
     // Разрешаем оптображение результатов ТОЛЬКО после ответов на вопросы
     // Совпадение рандомного числа в сессии
-    // if($_SESSION['set_check'] == $_GET['set_check']){
-    $set_check=1;  
-    if($set_check == 1){  
+    if(isset($_GET['set_check']) && $_SESSION['set_check'] == $_GET['set_check']){  
       $poll_id = $_GET['poll_id'];
       // Формируем путь к папке с иззображениями
       $image_dir = '/rnd/images/';
@@ -58,14 +56,12 @@
               if ($row['result_comment']!= ''){
                   $result_design[$row['question_name']][$row['poll_id']."/".$row['question_id']."/".$row['design_small']]['cm'] .= "||".$row['result_comment']." (<i>".$row['u_name']."</i>)";
               }
-          }
-        
+          }        
           // Функция сортировки массива по значению ch - сумированный выбор ПО УБЫВАНИЮ!    
             function cmp($b, $a){ 
               return strnatcmp($a["ch"], $b["ch"]); 
             }             
-      session_destroy();
-      
+      session_destroy();      
       foreach ($result_design as $key => $value) {        
         echo "<h6>".$key."</h6>";
         echo "<div class = 'row justify-content-sm-left row-30'>";
@@ -80,17 +76,20 @@
         echo "</div>";
         echo "<hr style = 'margin: 30px 0'>";
       }
+      echo "<div class='row row-70 flex-lg-row-reverse'>";
+      echo "<div class='col-md-12' style='text-align: center;'>";
+      echo "  <div class='btn-group'>";
+      echo "    <button type = 'button' class = 'btn btn-warning btn-sm' onclick='history.back();'>Назад</button>"; 
+      echo "  </div>";    
+      echo "</div>";
+      echo "</div>";
     }else{
-      echo "Какой-то косяк";
       session_destroy();
+      echo "<p>Произошла ошибка!&nbsp;";
+      echo "Перейти на сайт <a href = 'https://www.cleanelly.ru'>Cleanelly.ru</a></p>";
+      
     }
-    echo "<div class='row row-70 flex-lg-row-reverse'>";
-    echo "<div class='col-md-12' style='text-align: center;'>";
-    echo "  <div class='btn-group'>";
-    echo "    <button type = 'button' class = 'btn btn-warning btn-sm' onclick='history.back();'>Назад</button>"; 
-    echo "  </div>";    
-    echo "</div>";
-    echo "</div>";
+
     ?>
   </div>
 </main>

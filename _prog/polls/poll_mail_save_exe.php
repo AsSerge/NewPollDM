@@ -16,17 +16,20 @@ if($_POST['mailing_id']){
 }
 
 if($_POST['mail_save_action'] == 'add'){
-    $sql = "INSERT INTO poll_mailing (poll_id, group_id, mailing_name, mailing_text, author_id) VALUES (?, ?, ?, ?, ?)"; // Плейсхолдер запроса
+    $mailing_send = 0;
+    $sql = "INSERT INTO poll_mailing (poll_id, group_id, mailing_name, mailing_text, author_id, mailing_send) VALUES (?, ?, ?, ?, ?, ?)"; // Плейсхолдер запроса
     $stmt = $db->prepare($sql); // Готовим запрос
     $stmt->bindParam(1, $poll_id);
     $stmt->bindParam(2, $group_id);
     $stmt->bindParam(3, $mailing_name);
     $stmt->bindParam(4, $mailing_text);
     $stmt->bindParam(5, $author_id);
+    $stmt->bindParam(6, $mailing_send);
     // Исполняем запрос
     $stmt->execute();
     // Возвращаемся на страницу    
     header("Location: /_prog/"); exit();
+
 
 }elseif($_POST['mail_save_action'] == 'update') {
     $sql = "UPDATE poll_mailing SET poll_id = ?, group_id = ?, mailing_name = ?, mailing_text = ?, author_id = ? WHERE mailing_id = ?";
@@ -41,6 +44,7 @@ if($_POST['mail_save_action'] == 'add'){
     $stmt->execute();
     // Возвращаемся на страницу    
     header("Location: /_prog/"); exit();
+    
 }
 
 ?>
