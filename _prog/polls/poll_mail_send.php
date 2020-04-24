@@ -57,6 +57,8 @@ while($row = $g_users->fetch()){
 <h4>Отправка сообщений</h4>
 <?php 
 
+// require_once '/_prog/polls/PHPMailer/PHPMailerFunction.php';
+
 foreach($user as $u){
 $text = $mailing_text."<br>";
 $text .= "{$u['name']} - Ваша ссылка для голосования: <a href = 'http://shop.cleanelly.ru/rnd/index.php?poll_id={$poll_id}&u_token={$u['u_token']}'>Ссылка</a><br>";
@@ -68,6 +70,10 @@ $text .= $author_position."<br>";
 $text .= "АО «ТПК «ДМ Текстиль Менеджмент»<br>Ростов-на-Дону, ул. Лермонтовская, 197/73<br>";
 $text .= "тел.: ".$author_phone."<br>";
 echo $text;
+echo "<br>";
+
+// SendMailGRMP($mail, $subject, $message, $sender_mail, $sender_name);
+
 }
 
 echo "<pre>";

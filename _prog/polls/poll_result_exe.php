@@ -17,7 +17,6 @@ function сleanComment($value) {
     return $value;
 }
 
-
 // Получаем имя голосоущего для занесения в базу результатов
 
 $sql = 'SELECT u_name FROM user WHERE u_id = ?';

@@ -59,7 +59,7 @@ $polls = $db->query($poll_name_quest);
                 $color = 'btn-success';
                 $poll_id = $row['poll_id'];                
                 $mailing_id = GetMailingId($db, $row['poll_id']);
-                $send_str = "onclick=\"javascript:document.location.href='/_prog/polls/poll_mail_send.php?poll_id={$poll_id}&mailing_id={$mailing_id}'\"";
+                $send_str = "onclick=\"javascript:document.location.href='/_prog/polls/poll_mail_send_exe.php?poll_id={$poll_id}&mailing_id={$mailing_id}'\"";
             }else{
                 $des = 'disabled';
                 $color = 'btn-info';
