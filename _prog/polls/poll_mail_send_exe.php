@@ -1,8 +1,21 @@
 <?php
 session_start();
+ignore_user_abort(true);//Устанавливает, необходимо ли прерывать работу скрипта при отключении клиента. 
+set_time_limit(600);//Устанавливает время автономной работы скрипта
 // Управление вопросами
 include('../../rnd/connect/connect_to_base.php');
 include('../../_prog/layot/function_site.php');
+
+// Функция записи информации в poll_mailing_stat (статистика отправки)
+function AddStatInfo($db, $poll_id, $mailing_id, $u_id){
+	$sql = "INSERT INTO poll_mailing_stat (poll_id, mailing_id, u_id) VALUES (?, ?, ?)";
+	$stmt = $db->prepare($sql); // Готовим запрос
+    $stmt->bindParam(1, $poll_id);
+	$stmt->bindParam(2, $mailing_id);
+	$stmt->bindParam(3, $u_id);
+    // Исполняем запрос
+    $stmt->execute();
+}
 // Подключаем файл PHPMailerFunction.php
 include('../../_prog/polls/PHPMailer/PHPMailerFunction.php');
 
@@ -66,21 +79,17 @@ foreach($user as $u){
 
 	$sender_mail = $author_mail;
 	$sender_name = $author_name;
-	// echo $mai."<br>";
-	// echo $subject."<br>";
-	// echo $message."<br>";
-	// echo $sender_mail."<br>";
-	// echo $sender_name."<br>";
-	
-	// echo "**************************************************************";
-	SendMailGRMP($mail, $subject, $message, $sender_mail, $sender_name);
-	sleep(3);
+//********************************************************************
+	SendMailGRMP($mail, $subject, $message, $sender_mail, $sender_name); // Отправляем почту
+	AddStatInfo($db, $poll_id, $mailing_id, $u['u_id']); // Пишем лог
+
+	sleep(3); // Устанавливаем паузу между отправкой: 3 сек.
 }
+// После отправки почты по списку - помечаем рассылку, как состоявшуюся
+$send_sql = 'UPDATE poll_mailing SET mailing_send = 1 WHERE mailing_id = ?';
+$stmt_send = $db->prepare($send_sql); // Готовим запрос
+$stmt_send->bindParam(1, $mailing_id);
+$stmt_send->execute();
 
-
-
-// SendMailGRMP($mail, $subject, $message, $sender_mail, $sender_name);
-echo "<br>Почта отправлена (test)";
-
-// header("Location: /_prog/"); exit();
+header("Location: /_prog/"); exit();
 ?>
