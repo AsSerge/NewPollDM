@@ -1,0 +1,17 @@
+.fg {
+  color: #11cc1b;
+}
+
+body {
+  font-size: 15px;
+}
+
+body div,
+body ul {
+  font-size: 15px;
+  margin-left: 25px;
+}
+
+.block {
+  color: grey;
+}
