@@ -28,6 +28,7 @@ $u_name = $u_p_name->fetchColumn();
     <meta charset="UTF-8">
     <title>Опрос по дизайнам</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="none">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,500&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">

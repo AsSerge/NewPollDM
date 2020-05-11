@@ -3,11 +3,12 @@
 include($_SERVER['DOCUMENT_ROOT'].'/_prog/login/line_check.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/_prog/layot/top_site.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/_prog/layot/top_menu.php');
+
+include('../../rnd/connect/connect_to_base.php');
 ?>
 <?php
-	$query = mysqli_query($link, "SELECT * FROM users WHERE 1");
-//  	$userdata = mysqli_fetch_assoc($query);
-
+$poll_name_quest = 'SELECT * FROM users WHERE 1';
+$query = $db->query($poll_name_quest);
 ?>
 <div class="container">
 <div style = "clear: both; height: 50px;"></div>
@@ -21,14 +22,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/_prog/layot/top_menu.php');
           	<th>Фамилия Имя</th>
           	<th>Город</th>
 		 	<th>Телефон</th>
-        	<th>Почта</th>         
+        	<th>Почта</th>
           	<th>Активность</th>
           	<th>Роль</th>
         </tr>
       </thead>
       <tbody>
 <?php
-	while($row=mysqli_fetch_array($query)){
+	while($row=$query->fetch()){
 		echo "<tr>";
 			echo "<td>".$row['user_id']."</td>";
 			echo "<td>".$row['user_login']."</td>";
@@ -40,7 +41,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/_prog/layot/top_menu.php');
 			echo "<td>".$row['user_role']."</td>";
 		echo "</tr>\n\r";
 	}
-?>        
+?>
 
       </tbody>	
 
